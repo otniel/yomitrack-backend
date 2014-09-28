@@ -15,6 +15,10 @@ Route::get('/', function() {
     return View::make('login');
 });
 
+Route::group(['prefix' => 'api/v1'], function() {
+    Route::resource('restaurant', 'RestaurantController');
+});
+
 Route::get('dashboard', function() {
     return View::make('home');
 });
