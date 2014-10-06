@@ -16,12 +16,14 @@ class RestaurantTransformer extends Transformer {
             'address'     => $restaurant['address'],
             'email'       => $restaurant['email'],
             'tel'         => $restaurant['tel'],
-            'rate'        => $restaurant['rate'],
-            'photo1'      => $restaurant['photo1'],
-            'photo2'      => $restaurant['photo2'],
-            'photo3'      => $restaurant['photo3'],
-            'photo4'      => $restaurant['photo4'],
-            'photo5'      => $restaurant['photo5'],
+            'rate'        => (float) $restaurant['rate'],
+            'photos'      => [
+                $restaurant['photo1'],
+                $restaurant['photo2'],
+                $restaurant['photo3'],
+                $restaurant['photo4'],
+                $restaurant['photo5']
+            ]
         ];
     }
 }
