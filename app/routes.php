@@ -17,6 +17,9 @@ Route::get('/', function() {
 
 Route::group(['prefix' => 'api/v1'], function() {
     Route::resource('restaurant', 'RestaurantController');
+    Route::resource('promotions', 'PromotionController');
+    Route::get('feed', 'PromotionController@getFeed');
+    Route::get('restaurant/{id}/promotions', 'PromotionController@index');
 });
 
 Route::get('dashboard', function() {

@@ -17,8 +17,7 @@ class RestaurantController extends ApiController {
 	 * @return Response
 	 */
 	public function index() {
-        // 1. All is bad
-        $limit = Input::get('limit') ?:3;
+        $limit = Input::get('limit') ?:10;
         $restaurants = Restaurant::paginate($limit);
 
         return $this->respondWithPagination($restaurants, [

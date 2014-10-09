@@ -11,7 +11,7 @@ class PromotionsTableSeeder extends Seeder {
 
         $restaurantIds = Restaurant::lists('id');
 
-		foreach(range(1, 10) as $index)
+		foreach(range(1, 100) as $index)
 		{
 			Promotion::create([
                 'restaurant_id' => $faker->randomElement($restaurantIds),
