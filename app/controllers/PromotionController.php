@@ -101,7 +101,14 @@ class PromotionController extends ApiController {
 	}
 
     public function getFeed() {
-        return 'feed!';
+        $limit = Input::get('limit') ?:10;
+
+        $promotions = Promotion::getFeed($limit);
+        //dd($promotions->all());
+        return $this->respondWithPagination($promotions, [
+            'data' => $this->promotionTransformer->transformFeedCollection($promotions->all()),
+            //'data' => $promotions->all(),
+        ]);
     }
 
 

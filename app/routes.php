@@ -11,6 +11,10 @@
 |
 */
 
+/*Event::listen('illuminate.query', function($sql) {
+    return array($sql);
+});*/
+
 Route::get('/', function() {
     return View::make('login');
 });

@@ -16,4 +16,16 @@ class PromotionTransformer extends Transformer {
             'description' => $promotion['description']
         ];
     }
-} 
+    public function transformFeedCollection($items) {
+        return array_map([$this, 'transformFeed'], $items);
+    }
+
+    public function transformFeed($promotion) {
+        return [
+            'name'             => $promotion->name,
+            'restaurant_rate'  => (float) $promotion->restaurant_rate,
+            'restaurant_photo' => $promotion->photo1
+        ];
+    }
+
+}

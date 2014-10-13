@@ -12,4 +12,13 @@ class Promotion extends Ardent {
     public static $relationsData = array(
         'restaurant'  => array(self::BELONGS_TO, 'Restaurant'),
     );
+
+    public static function getFeed($limit) {
+        //return Promotion::paginate($limit);
+        return DB::table('promotions')
+            ->join('restaurant', 'restaurant.id', '=', 'promotions.restaurant_id')
+            ->orderBy('promotions.updated_at', 'desc')
+            ->select('promotions.name', 'restaurant.photo1', 'restaurant.rate as restaurant_rate')
+            ->paginate($limit);
+    }
 }

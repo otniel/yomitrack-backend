@@ -83,5 +83,4 @@ class ApiController extends BaseController{
             'message' => $message
         ]);
     }
-
 } 
