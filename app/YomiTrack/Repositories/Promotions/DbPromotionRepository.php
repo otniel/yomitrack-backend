@@ -1,7 +1,7 @@
 <?php namespace YomiTrack\Repositories\Promotions;
 
 use YomiTrack\Repositories\DbRepository;
-
+use DB;
 class DbPromotionRepository extends DbRepository implements PromotionRepository {
     /**
      * @var Product
