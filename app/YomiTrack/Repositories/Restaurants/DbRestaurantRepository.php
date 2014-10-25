@@ -1,14 +1,15 @@
 <?php namespace YomiTrack\Repositories\Restaurants;
 
+use Restaurant;
 use YomiTrack\Repositories\DbRepository;
 
 class DbRestaurantRepository extends DbRepository implements RestaurantRepository {
     /**
      * @var Product
      */
-    private $model;
+    protected $model;
 
-    function __construct(\Restaurant $model) {
+    function __construct(Restaurant $model) {
         $this->model = $model;
     }
 

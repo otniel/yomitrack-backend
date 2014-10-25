@@ -11,6 +11,10 @@ namespace YomiTrack\Repositories;
 
 abstract class DbRepository {
     public function getPaginated($limit) {
-        return \Promotion::paginate($limit);
+        return $this->model->paginate($limit);
+    }
+
+    public function getById($id) {
+        return $this->model->find($id);
     }
 } 

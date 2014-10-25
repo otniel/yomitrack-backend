@@ -25,7 +25,6 @@ class RestaurantPromotionsController extends ApiController {
     {
         $limit = Input::get('limit') ?:10;
 
-        //$promotions = Restaurant::find($id)->promotions()->paginate($limit);
         $promotions = $this->restaurant->getPromotionsByRestaurant($id);
 
         return $this->respondWithPagination($promotions, [

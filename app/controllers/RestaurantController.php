@@ -21,8 +21,7 @@ class RestaurantController extends ApiController {
 	 */
 	public function index() {
         $limit = Input::get('limit') ?:10;
-        $restaurants = Restaurant::paginate($limit);
-        //$restaurants = $this->restaurant->getPaginated($limit);
+        $restaurants = $this->restaurant->getPaginated($limit);
 
         return $this->respondWithPagination($restaurants, [
                'data' => $this->restaurantTransformer->transformCollection($restaurants->all()),
@@ -37,13 +36,7 @@ class RestaurantController extends ApiController {
 	 */
 	public function show($id)
 	{
-        /*$comments = Restaurant::getComments($id);
-        return $comments;
-
-        return $this->respondWithPagination($restaurant, [
-            'data' => $this->restaurantTransformer->transformCollection($restaurant->all()),
-        ]);*/
-        $restaurant = Restaurant::find($id);
+        $restaurant = $this->restaurant->getById($id);
 
         if(!$restaurant ){
             return $this->respondNotFound('Restaurant does not exist.');

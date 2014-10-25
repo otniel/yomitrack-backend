@@ -8,7 +8,6 @@ class PromotionController extends ApiController {
     protected $transformer;
     protected $promos;
 
-
     function __construct(PromotionTransformer $transformer, PromotionRepository $promos) {
         $this->transformer = $transformer;
         $this->promos = $promos;
@@ -32,7 +31,7 @@ class PromotionController extends ApiController {
 
 	}
 
-/**
+    /**
 	 * Display the specified resource.
 	 *
 	 * @param  int  $id
@@ -40,7 +39,7 @@ class PromotionController extends ApiController {
 	 */
     public function show($id)
     {
-        $promotion = Promotion::find($id);
+        $promotion = $this->promos->getById($id);
 
         if(!$promotion ){
             return $this->respondNotFound('Promotion does not exist.');
@@ -49,19 +48,15 @@ class PromotionController extends ApiController {
         return $this->respond([
             'data' => $this->transformer->transform($promotion)
         ]);
-
     }
 
     public function getFeed() {
         $limit = Input::get('limit') ?:10;
 
-        $promotions = Promotion::getFeed($limit);
-        //dd($promotions->all());
+        // Trae el feed para el dashboard, paginado
+        $promotions = $this->promos->getFeed($limit);
         return $this->respondWithPagination($promotions, [
             'data' => $this->transformer->transformFeedCollection($promotions->all()),
-            //'data' => $promotions->all(),
         ]);
     }
-
-
 }
