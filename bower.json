@@ -1,0 +1,23 @@
+{
+  "name": "yomitrack-backend",
+  "version": "0.0.0",
+  "homepage": "https://github.com/otniel/yomitrack-backend",
+  "authors": [
+    "Otniel Aguilar <otnieel.aguilar@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.1",
+    "pusher": "~2.2.3"
+  },
+  "install" : {
+      "path": "public/js"
+  }
+}

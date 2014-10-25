@@ -123,7 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Way\Generators\GeneratorsServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider',
-        //'Artdarek\Pusherer\PushererServiceProvider'
+        'Artdarek\Pusherer\PushererServiceProvider'
 
     ),
 

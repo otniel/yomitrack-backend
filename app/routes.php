@@ -14,6 +14,18 @@
 /*Event::listen('illuminate.query', function($sql) {
     return array($sql);
 });*/
+
+// Pusher Demo
+Route::get('home', function() {
+    return View::make('pusher_home');
+});
+
+Route::any('test', function() {
+    $message = "This is just an example message!";
+    Pusherer::trigger('yomitrack-channel', 'userNearRestaurant', ['promo' => 'LLEVATE 2x1 EN HOTCAKES']);
+    return 'Done';
+});
+
 //Binds para las interfases de los repositorios
 App::bind('YomiTrack\Repositories\Promotions\PromotionRepository', 'YomiTrack\Repositories\Promotions\DbPromotionRepository');
 App::bind('YomiTrack\Repositories\Restaurants\RestaurantRepository', 'YomiTrack\Repositories\Restaurants\DbRestaurantRepository');

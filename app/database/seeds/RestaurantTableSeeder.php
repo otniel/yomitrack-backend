@@ -22,11 +22,11 @@ class RestaurantTableSeeder extends Seeder {
                 'email' => $faker->email,
                 'tel' => $faker->phoneNumber,
                 'rate' => $faker->randomFloat($nbMaxDecimals=2, $min=1, $max=5),
-                'photo1' => $faker->imageUrl(600, 340),
+                'photo1' => $faker->imageUrl(600, 339),
                 'photo3' => $faker->imageUrl(600, 340),
-                'photo2' => $faker->imageUrl(600, 340),
-                'photo4' => $faker->imageUrl(600, 340),
-                'photo5' => $faker->imageUrl(600, 340),
+                'photo2' => $faker->imageUrl(601, 339),
+                'photo4' => $faker->imageUrl(601, 340),
+                'photo5' => $faker->imageUrl(600, 341),
 			]);
 		}
 	}
