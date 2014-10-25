@@ -12,5 +12,10 @@ class Restaurant extends Ardent {
     public static $relationsData = array(
         'user'        => array(self::BELONGS_TO, 'User', 'foreign_key'=>'restaurant_id_user_foreign'),
         'promotions'  => array(self::HAS_MANY, 'Promotion'),
+        'rates'       => array(self::HAS_MANY, 'Rate')
     );
+
+    public function getComments($idRestaurant, $limit = 10) {
+        return Restaurant::find($idRestaurant)->rates->lists('comments');
+    }
 }

@@ -1,13 +1,17 @@
 <?php
 
 use YomiTrack\Transformers\PromotionTransformer;
+use YomiTrack\Repositories\Promotions\PromotionRepository;
 
 class PromotionController extends ApiController {
 
-    protected $promotionTransformer;
+    protected $transformer;
+    protected $promos;
 
-    function __construct(PromotionTransformer $promotionTransformer) {
-        $this->promotionTransformer = $promotionTransformer;
+
+    function __construct(PromotionTransformer $transformer, PromotionRepository $promos) {
+        $this->transformer = $transformer;
+        $this->promos = $promos;
         $this->beforeFilter('auth.basic', ['on' => 'post']);
     }
 
@@ -16,89 +20,37 @@ class PromotionController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function index($id = null)
+	public function index()
 	{
         $limit = Input::get('limit') ?:10;
 
-        $promotions = $id ? Restaurant::find($id)->promotions()->paginate($limit) : Promotion::paginate($limit);
+        $promotions = $this->promos->getPaginated($limit);
 
         return $this->respondWithPagination($promotions, [
-            'data' => $this->promotionTransformer->transformCollection($promotions->all()),
+            'data' => $this->transformer->transformCollection($promotions->all()),
         ]);
 
 	}
 
-
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-
-	/**
+/**
 	 * Display the specified resource.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		//
-	}
+    public function show($id)
+    {
+        $promotion = Promotion::find($id);
 
+        if(!$promotion ){
+            return $this->respondNotFound('Promotion does not exist.');
+        }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+        return $this->respond([
+            'data' => $this->transformer->transform($promotion)
+        ]);
 
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+    }
 
     public function getFeed() {
         $limit = Input::get('limit') ?:10;
@@ -106,7 +58,7 @@ class PromotionController extends ApiController {
         $promotions = Promotion::getFeed($limit);
         //dd($promotions->all());
         return $this->respondWithPagination($promotions, [
-            'data' => $this->promotionTransformer->transformFeedCollection($promotions->all()),
+            'data' => $this->transformer->transformFeedCollection($promotions->all()),
             //'data' => $promotions->all(),
         ]);
     }

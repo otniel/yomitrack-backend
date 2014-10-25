@@ -12,7 +12,7 @@ class RatesTableSeeder extends Seeder {
         $restaurantIds = Restaurant::lists('id');
         $customerIds   = Customer::lists('id');
 
-		foreach(range(1, 50) as $index)
+		foreach(range(1, 500) as $index)
 		{
 			Rate::create([
                 'restaurant_id' => $faker->randomElement($restaurantIds),

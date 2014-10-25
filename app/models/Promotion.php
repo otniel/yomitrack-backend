@@ -16,9 +16,12 @@ class Promotion extends Ardent {
     public static function getFeed($limit) {
         //return Promotion::paginate($limit);
         return DB::table('promotions')
-            ->join('restaurant', 'restaurant.id', '=', 'promotions.restaurant_id')
+            ->join('restaurant', 'promotions.restaurant_id', '=', 'restaurant.id')
+            ->join('rates', 'promotions.restaurant_id', '=', 'rates.restaurant_id')
             ->orderBy('promotions.updated_at', 'desc')
-            ->select('promotions.name',
+            ->select('promotions.id',
+                     'promotions.name',
+                     'restaurant.name as restaurant_name',
                      'restaurant.photo1',
                      'restaurant.photo2',
                      'restaurant.photo3',

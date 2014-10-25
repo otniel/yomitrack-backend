@@ -13,4 +13,8 @@ class Rate extends Ardent {
         'restaurant' => array(self::BELONGS_TO, 'Restaurant'),
         'customer'  => array(self::BELONGS_TO, 'Customer'),
     );
+
+    public function comments($id) {
+        return 'Hello '.$id;
+    }
 }
