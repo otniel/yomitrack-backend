@@ -15,18 +15,20 @@ class RestaurantTableSeeder extends Seeder {
 		{
 
 			Restaurant::create([
-                'user_id' => $faker->randomElement($usersIds),
-                'name' => $faker->word,
+                'user_id'     => $faker->randomElement($usersIds),
+                'name'        => $faker->word,
                 'description' => $faker->paragraph(4),
-                'address' => $faker->address,
-                'email' => $faker->email,
-                'tel' => $faker->phoneNumber,
-                'rate' => $faker->randomFloat($nbMaxDecimals=2, $min=1, $max=5),
-                'photo1' => $faker->imageUrl(600, 339),
-                'photo3' => $faker->imageUrl(600, 340),
-                'photo2' => $faker->imageUrl(601, 339),
-                'photo4' => $faker->imageUrl(601, 340),
-                'photo5' => $faker->imageUrl(600, 341),
+                'address'     => $faker->address,
+                'latitude'    => $faker->latitude,
+                'longitude'   => $faker->longitude,
+                'email'       => $faker->email,
+                'tel'         => $faker->phoneNumber,
+                'rate'        => $faker->randomFloat($nbMaxDecimals=2, $min=1, $max=5),
+                'photo1'      => $faker->imageUrl(600, 339, 'food'),
+                'photo3'      => $faker->imageUrl(600, 340, 'food'),
+                'photo2'      => $faker->imageUrl(601, 339, 'food'),
+                'photo4'      => $faker->imageUrl(601, 340, 'food'),
+                'photo5'      => $faker->imageUrl(600, 341, 'food'),
 			]);
 		}
 	}

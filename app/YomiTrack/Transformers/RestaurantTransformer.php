@@ -17,6 +17,8 @@ class RestaurantTransformer extends Transformer {
             'email'       => $restaurant['email'],
             'tel'         => $restaurant['tel'],
             'rate'        => (float) $restaurant['rate'],
+            'latitude'    => (float) $restaurant['latitude'],
+            'longitude'    => (float) $restaurant['longitude'],
             'photos'      => [
                 $restaurant['photo1'],
                 $restaurant['photo2'],
