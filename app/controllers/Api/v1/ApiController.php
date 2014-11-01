@@ -1,4 +1,4 @@
-<?php
+<?php namespace Api\v1;
 /**
  * Created by PhpStorm.
  * User: otniel
@@ -7,11 +7,13 @@
  */
 
 use \Illuminate\Http\Response as IlluminateResponse;
+use BaseController;
+use Illuminate\Support\Facades\Response;
 
 class ApiController extends BaseController{
     protected $statusCode = IlluminateResponse::HTTP_OK;
 
-    /**
+    /**Illuminate
      * @param mixed $statusCode
      */
     public function setStatusCode($statusCode)

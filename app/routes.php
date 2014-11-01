@@ -26,19 +26,15 @@ Route::any('test', function() {
     return 'Done';
 });
 
-//Binds para las interfases de los repositorios
-App::bind('YomiTrack\Repositories\Promotions\PromotionRepository', 'YomiTrack\Repositories\Promotions\DbPromotionRepository');
-App::bind('YomiTrack\Repositories\Restaurants\RestaurantRepository', 'YomiTrack\Repositories\Restaurants\DbRestaurantRepository');
-
 Route::get('/', function() {
     return View::make('login');
 });
 
 Route::group(['prefix' => 'api/v1'], function() {
-    Route::resource('restaurant', 'RestaurantController');
-    Route::resource('promos', 'PromotionController');
-    Route::resource('restaurant.promos', 'RestaurantPromotionsController', ['only' => ['index']]);
-    Route::get('feed', 'PromotionController@getFeed');
+    Route::resource('restaurant', 'Api\v1\RestaurantController');
+    Route::resource('promos', 'Api\v1\PromotionController');
+    Route::resource('restaurant.promos', 'Api\v1\RestaurantPromotionsController', ['only' => ['index']]);
+    Route::get('feed', 'Api\v1\PromotionController@getFeed');
 });
 
 Route::get('dashboard', function() {

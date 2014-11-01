@@ -1,10 +1,13 @@
-<?php
+<?php namespace Api\v1;
 
+use Illuminate\Support\Facades\Input;
 use YomiTrack\Transformers\PromotionTransformer;
 use YomiTrack\Repositories\Promotions\PromotionRepository;
+use Laracasts\Commander\CommanderTrait;
 
 class PromotionController extends ApiController {
 
+    use CommanderTrait;
     protected $transformer;
     protected $promos;
 

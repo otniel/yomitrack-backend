@@ -1,4 +1,4 @@
-<?php
+<?php namespace Api\v1;
 
 use YomiTrack\Transformers\RestaurantTransformer;
 use YomiTrack\Repositories\Restaurants\RestaurantRepository;
