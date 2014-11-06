@@ -9,7 +9,9 @@
 		"laravelbook/ardent": "2.*",
 		"fzaninotto/faker": "1.3",
 		"itsgoingd/clockwork": "dev-master",
-		"artdarek/pusherer": "1.0.*"
+		"artdarek/pusherer": "1.0.*",
+        "laracasts/commander" : "~1.0",
+        "treffynnon/navigator": "1.*"
 	},
 	"autoload": {
 		"classmap": [
