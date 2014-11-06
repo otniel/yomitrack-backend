@@ -1,5 +1,6 @@
 <?php namespace Api\v1;
 
+use Illuminate\Support\Facades\Input;
 use YomiTrack\Transformers\RestaurantTransformer;
 use YomiTrack\Repositories\Restaurants\RestaurantRepository;
 
