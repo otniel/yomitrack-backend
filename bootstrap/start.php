@@ -70,6 +70,6 @@ require $framework.'/Illuminate/Foundation/start.php';
 |
 */
 $app->bind('YomiTrack\Repositories\Promotions\PromotionRepository', 'YomiTrack\Repositories\Promotions\DbPromotionRepository');
-$app->bind('YomiTrack\Repositories\Restaurants\RestaurantRepository', 'YomiTrack\Repositories\Restaurants\DbRestaurantRepositoryphom');
+$app->bind('YomiTrack\Repositories\Restaurants\RestaurantRepository', 'YomiTrack\Repositories\Restaurants\DbRestaurantRepository');
 
 return $app;
