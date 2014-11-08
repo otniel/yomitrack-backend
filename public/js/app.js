@@ -10,7 +10,7 @@
         }
     };
 
-    channel.bind('userNearRestaurant', function(data) {
+    channel.bind('customerNearRestaurant', function(data) {
         (new App.Notifier).notify(data.promo)
     });
 })();
