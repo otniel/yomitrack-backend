@@ -9,7 +9,10 @@ class PromotionsController extends \BaseController {
 	 */
 	public function index()
 	{
-        return View::make('promotions.index');
+        $promos = Promotion::paginate(5);
+        return View::make('promotions.index', [
+            'promotions' => $promos
+        ]);
 	}
 
 
