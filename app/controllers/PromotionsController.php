@@ -1,15 +1,25 @@
 <?php
 
+use YomiTrack\Repositories\Promotions\DbPromotionRepository;
+
 class PromotionsController extends \BaseController {
 
-	/**
+    protected $repo;
+
+    public function __construct(DbPromotionRepository $repo) {
+        $this->repo = $repo;
+    }
+
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-        $promos = Promotion::paginate(5);
+        $rest_id = Auth::user()->restaurant()->getResults()->id;
+
+        $promos = $this->repo->getPromotionsByRestaurant($rest_id);
         return View::make('promotions.index', [
             'promotions' => $promos
         ]);
@@ -23,7 +33,7 @@ class PromotionsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('promotions.form');
 	}
 
 
@@ -34,9 +44,11 @@ class PromotionsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+  		$input = Input::only('name', 'description');
+        $restaurant_id = Auth::user()->restaurant()->getResults()->id;
+        $this->repo->createPromotion($input, $restaurant_id);
+        return View::make('layouts.closeModal');
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -58,7 +70,10 @@ class PromotionsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$promo = $this->repo->getById($id);
+        return View::make('promotions.edit', [
+            'promotion' => $promo
+        ]);
 	}
 
 
@@ -70,7 +85,14 @@ class PromotionsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+        extract(Input::all());
+        $promo = $this->repo->getById($id);
+
+        $promo->name = $name;
+        $promo->description = $description;
+        $promo->save();
+
+        return View::make('layouts.closeModal');
 	}
 
 
@@ -80,10 +102,11 @@ class PromotionsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-		//
-	}
+    public function destroy($id) {
+        //dd($id);
+        $this->repo->deletePromotion($id);
+        return Redirect::route('promotions.index');
+    }
 
 
 }

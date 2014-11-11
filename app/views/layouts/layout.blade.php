@@ -55,11 +55,11 @@
         <div class="container">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <span class="badge alert-primary pull-left">Bienvenido, Otniel</span>
+                    <span class="badge alert-primary pull-left">Bienvenido, {{ Auth::user()->username }}</span>
                     <div class="btn-toolbar pull-right" >
                         <div class="btn-group">
                             <a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-user"></span></a>
-                            <a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-off"></span></a>
+                            <a href="{{ URL::route('logout') }}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-off"></span></a>
                         </div>
                     </div>
                     <br>
@@ -75,7 +75,7 @@
                             <img class="pull-right" src=" http://i.imgur.com/l13n7pk.jpg">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="#">{{Lang::get('messages.dashboard')}}</a>
+                                    <a href={{ URL::route('dashboard') }}>{{Lang::get('messages.dashboard')}}</a>
                                 </li>
                                 <li>
                                     <a href={{ URL::route('promotions.index') }}>{{Lang::get('messages.promotions')}}</a>
@@ -100,7 +100,7 @@
 
             </div>
         </div>
-
+        @yield('bottom-scripts')
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     </body>
 </html>

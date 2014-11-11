@@ -70,9 +70,10 @@
                 </center>
 
 
-                <form method="GET" action="http://yomitrack.ensi.com.mx/dashboard" accept-charset="UTF-8" class="form-signin"><input name="_token" type="hidden" value="7EPCGxhbBZq98xYzUFekcer2htllRYqjsKv0JtHd">
-
+                <!--<form method="GET" action="http://yomitrack.ensi.com.mx/dashboard" accept-charset="UTF-8" class="form-signin">
+                    <input name="_token" type="hidden" value="7EPCGxhbBZq98xYzUFekcer2htllRYqjsKv0JtHd">-->
                     <!-- check for login errors flash var -->
+                    {{ Form::open(array('route' => 'sessions.store', 'class' => 'form-signin')) }}
 
                     <fieldset>
                         <div class="form-group input-group">
@@ -87,8 +88,9 @@
 
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                     </fieldset>
+                    {{ Form::close() }}
 
-                </form>
+                <!--</form>-->
             </div>
 
         </div>

@@ -1,5 +1,6 @@
 <?php namespace YomiTrack\Repositories\Promotions;
 
+use Illuminate\Support\Facades\Auth;
 use YomiTrack\Repositories\DbRepository;
 use DB;
 class DbPromotionRepository extends DbRepository implements PromotionRepository {
@@ -13,7 +14,8 @@ class DbPromotionRepository extends DbRepository implements PromotionRepository 
     }
 
     public function getPromotionsByRestaurant($id) {
-        return $this->model->find($id)->promotions()->paginate($limit);
+
+        return \Restaurant::find($id)->promotions()->paginate(10);
     }
 
     public function getFeed($limit) {
@@ -32,4 +34,20 @@ class DbPromotionRepository extends DbRepository implements PromotionRepository 
                 'promotions.restaurant_id')
             ->paginate($limit);
     }
+
+    public function createPromotion($input, $restaurant_id) {
+        extract($input);
+        $promo = new \Promotion;
+
+        $promo->name = $name;
+        $promo->description = $description;
+        $promo->restaurant_id = $restaurant_id;
+        $promo->save();
+    }
+
+    public function deletePromotion($id) {
+        $this->model->find($id)->delete();
+    }
+
+
 }

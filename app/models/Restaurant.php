@@ -16,6 +16,7 @@ class Restaurant extends Ardent {
     );
 
     public function getComments($idRestaurant, $limit = 10) {
-        return Restaurant::find($idRestaurant)->rates->lists('comments');
+        //return Restaurant::find($idRestaurant)->rates->lists('comments');
+        return $this->rates->lists('comments');
     }
 }

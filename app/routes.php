@@ -15,6 +15,11 @@
     return array($sql);
 });*/
 
+// Sesiones
+Route::get('login', 'SessionsController@create', ['only' => ['create', 'store', 'destroy']]);
+Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
+Route::resource('sessions', 'SessionsController');
+
 // Pusher Demo
 Route::get('home', function() {
     return View::make('pusher_home');
@@ -37,8 +42,9 @@ Route::group(['prefix' => 'api/v1'], function() {
     Route::get('iamnear', 'Api\v1\NotificationsController@customerNearRestaurant');
 });
 
-Route::get('dashboard', function() {
-    return View::make('home');
+Route::group(array('before' => 'auth'), function() {
+    Route::resource('promotions', 'PromotionsController');
+    Route::get('dashboard', ['as' => 'dashboard', 'uses' => function() {
+            return View::make('home');
+        }]);
 });
-
-Route::resource('promotions', 'PromotionsController');

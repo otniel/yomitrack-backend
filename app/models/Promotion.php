@@ -7,7 +7,7 @@ class Promotion extends Ardent {
 
     protected $hidden = array('id_promotion', 'id_restaurant', 'created_at', 'updated_at');
 
-    protected $fillable = [];
+    protected $fillable = ['name', 'description', 'restaurant_id'];
 
     public static $relationsData = array(
         'restaurant'  => array(self::BELONGS_TO, 'Restaurant'),
