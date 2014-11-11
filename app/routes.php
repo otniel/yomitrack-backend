@@ -15,6 +15,9 @@
     return array($sql);
 });*/
 
+Route::get('/', function() {
+    return Redirect::to('login');
+});
 // Sesiones
 Route::get('login', 'SessionsController@create', ['only' => ['create', 'store', 'destroy']]);
 Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
