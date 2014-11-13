@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'dashboard'          => 'Dashboard',
     'promotions'         => 'Promociones',
@@ -8,6 +9,14 @@ return array(
     'search_promotion'   => 'Buscar Promoción',
     'type'               => 'Tipo',
     'search'             => 'Buscar',
-    'add'                => 'Agregar'
+    'add'                => 'Agregar',
+    'new_promo'          => 'Nueva promoción',
+    'name'               => 'Nombre',
+    'description'        => 'Descripción',
+    'address'            => 'Dirección',
+    'email'              => 'Correo Electrónico',
+    'tel'                => 'Teléfono',
+    'save'               => 'Guardar'
+
 
 );

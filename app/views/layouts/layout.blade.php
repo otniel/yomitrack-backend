@@ -80,6 +80,9 @@
                                 <li>
                                     <a href={{ URL::route('promotions.index') }}>{{Lang::get('messages.promotions')}}</a>
                                 </li>
+                                <li>
+                                    <a href={{ URL::route('restaurant.index') }}> Restaurant</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>

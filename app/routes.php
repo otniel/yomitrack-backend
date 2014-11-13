@@ -47,7 +47,9 @@ Route::group(['prefix' => 'api/v1'], function() {
 
 Route::group(array('before' => 'auth'), function() {
     Route::resource('promotions', 'PromotionsController');
+    Route::resource('restaurant', 'RestaurantController');
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => function() {
             return View::make('home');
         }]);
+
 });

@@ -13,5 +13,10 @@ return array(
     'new_promo'          => 'New Promotion',
     'name'               => 'Name',
     'description'        => 'Description'
+    'address'            => 'Address'
+    'email'              => 'Email',
+    'tel'                => 'Telephone',
+    'save'               => 'Save',
+
 
 );

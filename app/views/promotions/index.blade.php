@@ -115,22 +115,11 @@
                         <td width="550px"> {{ $promotion->description }}</td>
                         <td>
 
-                            <!-- Single button -->
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    Opciones <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="javascript:void(0);" onclick="javascript:viewPromoDetails({{ $promotion->id }});" alt="Ver detalle">Edit</a>
-                                    </li>
-                                    <li> {{Form::delete('promotions/'. $promotion->id,
-                                                        'Delete',
-                                                        array('id'=>'the_form_id','class' => 'delete-form')
-                                            )}}
-                                    </li>
-                                </ul>
-                            </div>
-
+                            {{Form::delete('promotions/'. $promotion->id,
+                                                        'Borrar',
+                                                        array('id'=>'the_form_id','class' => 'delete-form'),
+                                                        array('class' => 'btn btn-danger btn-sm')
+                             )}}
                         </td>
                     </tr>
                     @endforeach
@@ -145,12 +134,7 @@
 @section('bottom-scripts')
     <script>
         $(document).on('submit', '.delete-form', function(){
-            bootbox.confirm("Are you sure?", function(result) {
-                if(result) {
-                    continue;
-                }
-            });
-            //return confirm('Are you sure?');
+            return confirm('Are you sure?');
         });
     </script>
 @stop
