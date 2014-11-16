@@ -11,7 +11,7 @@ class RestaurantTableSeeder extends Seeder {
 
         $usersIds = User::lists('id');
 
-		foreach(range(1, 30) as $index)
+		foreach(range(1, 32) as $index)
 		{
 
 			Restaurant::create([
@@ -21,6 +21,7 @@ class RestaurantTableSeeder extends Seeder {
                 'address'     => $faker->address,
                 'latitude'    => $faker->latitude,
                 'longitude'   => $faker->longitude,
+                'radius'      => '300',
                 'email'       => $faker->email,
                 'tel'         => $faker->phoneNumber,
                 'rate'        => $faker->randomFloat($nbMaxDecimals=2, $min=1, $max=5),

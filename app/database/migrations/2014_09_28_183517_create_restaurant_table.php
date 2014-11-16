@@ -26,8 +26,9 @@ class CreateRestaurantTable extends Migration {
             $table->string('name', 25);
             $table->text('description');
             $table->string('address')->nullable();
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->double('latitude', 15, 10);
+            $table->double('longitude', 15, 10);
+            $table->integer('radius');
             $table->string('email', 30)->nullable();
             $table->string('tel', 20)->nullable();
             $table->float('rate')->default(0);

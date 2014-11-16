@@ -11,7 +11,8 @@
 		"itsgoingd/clockwork": "dev-master",
 		"artdarek/pusherer": "1.0.*",
         "laracasts/commander" : "~1.0",
-        "treffynnon/navigator": "1.*"
+        "treffynnon/navigator": "1.*",
+		"intervention/image": "2.*"
 	},
 	"autoload": {
 		"classmap": [
