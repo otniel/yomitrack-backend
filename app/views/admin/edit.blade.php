@@ -75,16 +75,16 @@
                                         Usuario
                                     </div>
                                     <div class="panel-body">
-                                        {{ Form::open(['route' => 'admin.store', 'files' => true]) }}
+                                        {{ Form::open(['url' => 'admin/'.$user->id, 'method' => 'PUT']) }}
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 {{ Form::label('username', 'Nombre', array('class' => 'awesome')) }}
-                                                {{ Form::text('username', '', ['class' => 'form-control']) }}
+                                                {{ Form::text('username', $user->username, ['class' => 'form-control']) }}
                                                 {{ $errors->first('username') }}
                                             </div>
                                             <div class="form-group">
                                                 {{ Form::label('email', 'Email', array('class' => 'awesome')) }}
-                                                {{ Form::text('email', '', ['class' => 'form-control']) }}
+                                                {{ Form::text('email', $user->email, ['class' => 'form-control']) }}
                                                 {{ $errors->first('email') }}
                                             </div>
                                             <div class="form-group">
@@ -105,23 +105,23 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 {{ Form::label('name', Lang::get('messages.name'), array('class' => 'awesome')) }}
-                                                {{ Form::text('name', '', ['class' => 'form-control']) }}
+                                                {{ Form::text('name', $restaurant->name, ['class' => 'form-control']) }}
                                                 {{ $errors->first('name') }}
                                             </div>
                                             <div class="form-group">
                                                 {{ Form::label('description', Lang::get('messages.description'), array('class' => 'awesome')) }}
-                                                {{ Form::textarea('description', '', ['class' => 'form-control']) }}
+                                                {{ Form::textarea('description', $restaurant->description, ['class' => 'form-control']) }}
                                                 {{ $errors->first('description') }}
                                             </div>
                                             <div class="form-group">
                                                 {{ Form::label('rest_email', Lang::get('messages.email'), array('class' => 'awesome')) }}
-                                                {{ Form::email('rest_email', '', ['class' => 'form-control']) }}
+                                                {{ Form::email('rest_email', $restaurant->email, ['class' => 'form-control']) }}
                                                 {{ $errors->first('rest_email') }}
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     {{ Form::label('tel', Lang::get('messages.tel'), array('class' => 'awesome')) }}
-                                                    {{ Form::text('tel', '', ['class' => 'form-control']) }}
+                                                    {{ Form::text('tel', $restaurant->tel, ['class' => 'form-control']) }}
                                                     {{ $errors->first('tel') }}
                                                 </div>
                                             </div>
@@ -129,7 +129,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 {{ Form::label('address', Lang::get('messages.address'), array('class' => 'awesome')) }}
-                                                {{ Form::text('show_address', '', ['class' => 'form-control', 'id' => 'us2-address', 'disabled']) }}
+                                                {{ Form::text('address', $restaurant->address, ['class' => 'form-control', 'id' => 'us2-address', 'disabled']) }}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -137,14 +137,17 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                {{ Form::text('radius', '', ['class' => 'form-control', 'id' => 'us2-radius']) }}
-                                                {{ Form::hidden('latitude', null, ['id' => 'us2-lat']) }}
-                                                {{ Form::hidden('longitude', null, ['id' => 'us2-lon']) }}
+                                                {{ Form::text('radius', $restaurant->radius, ['class' => 'form-control', 'id' => 'us2-radius']) }}
+                                                {{ Form::hidden('latitude', $restaurant->latitude, ['id' => 'us2-lat']) }}
+                                                {{ Form::hidden('longitude', $restaurant->longitude, ['id' => 'us2-lon']) }}
                                                 {{ Form::hidden('address', null, ['id' => 'address']) }}
+
                                             </div>
 
                                             <div id="us2" style="width: 493px; height: 360px;"></div>
-                                        <br/><br/><button type="submit" class=" pull-right btn btn-primary">{{ Lang::get('messages.save') }}</button>
+                                        <br/><br/>
+                                        {{ link_to("/admin", "Regresar", ['class' => 'btn btn-danger']) }}
+                                        <button type="submit" class=" btn btn-primary">{{ Lang::get('messages.save') }}</button>
                                         </div>
                                         <div class="col-md-3">
                                     </div>
@@ -176,12 +179,13 @@
                var lat = position.coords.latitude;
                var lon = position.coords.longitude;
 
-               var latitude_field = document.getElementById('us2-lat')
-               var longitude_field = document.getElementById('us2-lon')
+               var latitude_field = document.getElementById('us2-lat').value
+               var longitude_field = document.getElementById('us2-lon').value
+               var radius_field = document.getElementById('us2-radius').value
 
                $('#us2').locationpicker({
-                   location: {latitude: lat, longitude: lon},
-                   radius: 300,
+                   location: {latitude: latitude_field, longitude: longitude_field},
+                   radius: radius_field,
                    inputBinding: {
                        latitudeInput: $('#us2-lat'),
                        longitudeInput: $('#us2-lon'),
@@ -191,9 +195,9 @@
                    enableAutocomplete: true,
                    onchanged: function(currentLocation, radius, isMarkerDropped) {
                        var address = $(this).locationpicker('location').name;
-                       $('#address').val(address);
-                       $('#us2-lat').val(currentLocation.latitude);
-                       $('#us2-lon').val(currentLocation.longitude);
+                        $('#address').val(address);
+                        $('#us2-lat').val(currentLocation.latitude);
+                        $('#us2-lon').val(currentLocation.longitude);
                        //alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
                    }
                 });

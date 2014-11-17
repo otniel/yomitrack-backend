@@ -19,6 +19,7 @@ class PromotionsController extends \BaseController {
 	{
         $rest_id = Auth::user()->restaurant()->getResults()->id;
 
+
         $promos = $this->repo->getPromotionsByRestaurant($rest_id);
         return View::make('promotions.index', [
             'promotions' => $promos

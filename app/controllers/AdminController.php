@@ -21,9 +21,11 @@ class AdminController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		return View::make('admin.create');
+	public function index() {
+        $users = User::paginate(5);
+		return View::make('admin.index', [
+            'users' => $users
+        ]);
 	}
 
 	/**
@@ -34,7 +36,7 @@ class AdminController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+        return View::make('admin.create');
 	}
 
 	/**
@@ -46,7 +48,6 @@ class AdminController extends \BaseController {
 	public function store()
 	{
         $this->adminForm->validate(Input::all());
-
         $user = new User();
         $user->username = Input::get('username');
         $user->email = Input::get('email');
@@ -68,29 +69,15 @@ class AdminController extends \BaseController {
         $restaurant->email = Input::get('rest_email');
         $restaurant->tel = Input::get('tel');
         $restaurant->rate = 4.8;
-
-        $photo1 = Input::file('photo1');
-        $photo2 = Input::file('photo2');
-        $photo3 = Input::file('photo3');
-        $photo4 = Input::file('photo4');
-        $photo5 = Input::file('photo5');
-
-        $photo1->move(base_path().'/public/img');
-        $photo2->move(base_path().'/public/img');
-        $photo3->move(base_path().'/public/img');
-        $photo4->move(base_path().'/public/img');
-        $photo5->move(base_path().'/public/img');
-
-
-        $restaurant->photo1 = $photo1->getRealPath();
-        $restaurant->photo2 = $photo2->getRealPath();
-        $restaurant->photo3 = $photo3->getRealPath();
-        $restaurant->photo4 = $photo4->getRealPath();
-        $restaurant->photo5 = $photo5->getRealPath();
+        $restaurant->photo1 = 'http://lorempixel.com/750/480/food/';
+        $restaurant->photo2 = 'http://lorempixel.com/751/480/food/';
+        $restaurant->photo3 = 'http://lorempixel.com/752/480/food/';
+        $restaurant->photo4 = 'http://lorempixel.com/753/480/food/';
+        $restaurant->photo5 = 'http://lorempixel.com/754/480/food/';
 
         $restaurant->save();
 
-        return 'Ve y checa si jala';
+        return Redirect::to('admin');
 	}
 
 	/**
@@ -114,7 +101,12 @@ class AdminController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$user = User::find($id);
+        $restaurant = $user->restaurant;
+        return View::make('admin.edit', [
+            'user'       => $user,
+            'restaurant' => $restaurant
+        ]);
 	}
 
 	/**
@@ -126,8 +118,33 @@ class AdminController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
-	}
+        $this->adminForm->validate(Input::all());
+        $user = User::find($id);
+        $user->username = Input::get('username');
+        $user->email = Input::get('email');
+        $user->password = Hash::make(Input::get('password'));
+
+        $user->save();
+
+        $restaurant = $user->restaurant;
+        $restaurant->name = Input::get('name');
+        $restaurant->description = Input::get('description');
+        $restaurant->address = Input::get('address');
+        $restaurant->latitude = Input::get('latitude');
+        $restaurant->longitude = Input::get('longitude');
+        $restaurant->radius = Input::get('radius');
+        $restaurant->email = Input::get('rest_email');
+        $restaurant->tel = Input::get('tel');
+        $restaurant->rate = 4.8;
+        $restaurant->photo1 = 'http://lorempixel.com/750/480/food/';
+        $restaurant->photo2 = 'http://lorempixel.com/751/480/food/';
+        $restaurant->photo3 = 'http://lorempixel.com/752/480/food/';
+        $restaurant->photo4 = 'http://lorempixel.com/753/480/food/';
+        $restaurant->photo5 = 'http://lorempixel.com/754/480/food/';
+
+        $restaurant->save();
+        return Redirect::to('admin');
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -138,7 +155,10 @@ class AdminController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+        $user = User::find($id);
+        $user->delete();
+        //$restaurant = $user->restaurant;
+        return Redirect::to('admin');
 	}
 
 }

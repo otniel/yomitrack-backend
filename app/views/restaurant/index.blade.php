@@ -45,7 +45,7 @@
                         {{ Form::label('tel', Lang::get('messages.tel'), array('class' => 'awesome')) }}
                         {{ Form::text('tel', $restaurant->tel, ['class' => 'form-control']) }}
                     </div>
-                    <button type="submit" class="btn btn-default">{{ Lang::get('messages.save') }}</button>
+                    {{--<button type="submit" class="btn btn-default">{{ Lang::get('messages.save') }}</button>--}}
                 {{ Form::close() }}
             </div>
             <div class="col-md-6">
@@ -56,18 +56,18 @@
             </div>
             <div class="col-md-6">
                 {{ Form::label('radius', 'Radius', array('class' => 'awesome')) }}
-                {{ Form::text('latitude', $restaurant->latitude, ['id' => 'us2-lat']) }}
-                {{ Form::text('longitude', $restaurant->longitude, ['id' => 'us2-lon']) }}
+                {{ Form::hidden('latitude', $restaurant->latitude, ['id' => 'us2-lat']) }}
+                {{ Form::hidden('longitude', $restaurant->longitude, ['id' => 'us2-lon']) }}
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    {{ Form::text('radius', '', ['class' => 'form-control', 'id' => 'us2-radius']) }}
+                    {{ Form::text('radius', $restaurant->radius, ['class' => 'form-control', 'id' => 'us2-radius']) }}
                 </div>
                 <div id="us2" style="width: 493px; height: 360px;"></div>
             </div>
-            <div class="col-md-3">
+            {{--<div class="col-md-3">
                 <button onclick="getLocation()" class="btn btn-info">Obtener posición actual</button>
-            </div>
+            </div>--}}
         </div>
     </div>
 
@@ -89,12 +89,13 @@
            var lat = position.coords.latitude;
            var lon = position.coords.longitude;
 
-           var latitude_field = document.getElementById('us2-lat').value
+           var latitude_field = document.getElementById('us2-lat').value;
            var longitude_field = document.getElementById('us2-lon').value;
-
+           var radius_field = document.getElementById('us2-radius').value;
            $('#us2').locationpicker({
+               draggable: false,
                location: {latitude: latitude_field, longitude: longitude_field},
-               radius: 300,
+               radius: radius_field,
                inputBinding: {
                    latitudeInput: $('#us2-lat'),
                    longitudeInput: $('#us2-lon'),

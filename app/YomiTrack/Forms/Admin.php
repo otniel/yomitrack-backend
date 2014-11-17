@@ -20,10 +20,5 @@ class Admin extends FormValidator {
         'description' => 'required',
         'email'       => 'required',
         'tel'         => 'required',
-        'photo1'      => 'required',
-        'photo2'      => 'required',
-        'photo3'      => 'required',
-        'photo4'      => 'required',
-        'photo5'      => 'required'
     ];
 } 
