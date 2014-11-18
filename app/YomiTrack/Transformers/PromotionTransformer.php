@@ -39,6 +39,7 @@ class PromotionTransformer extends Transformer {
             'restaurant_id'    => (int) $promotion->restaurant_id,
             'restaurant_name'  => $promotion->restaurant_name,
             'restaurant_rate'  => (float) $promotion->restaurant_rate,
+            'distance'         => round((float) $promotion->distance, 2),
             'photos' => [
                 $promotion->photo1,
                 $promotion->photo2,

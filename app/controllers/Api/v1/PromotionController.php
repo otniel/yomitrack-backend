@@ -56,8 +56,15 @@ class PromotionController extends ApiController {
     public function getFeed() {
         $limit = Input::get('limit') ?:10;
 
+        $latitude = Input::get('lat') ?: '25.7834523';
+        $longitude = Input::get('lon') ?: '-100.39381750000001';
+
+        // Compact construye un array asociativo (key-value) con el nombre y el valor del string
+        // i.e. ['latitude' => '25.7834523', 'longitude' => '-100.39381750000001']
+        $coordinates = compact('latitude', 'longitude');
+
         // Trae el feed para el dashboard, paginado
-        $promotions = $this->promos->getFeed($limit);
+        $promotions = $this->promos->getFeed($limit, $coordinates);
         return $this->respondWithPagination($promotions, [
             'data' => $this->transformer->transformFeedCollection($promotions->all()),
         ]);

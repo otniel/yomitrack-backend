@@ -18,10 +18,12 @@ class DbPromotionRepository extends DbRepository implements PromotionRepository 
         return \Restaurant::find($id)->promotions()->paginate(10);
     }
 
-    public function getFeed($limit) {
+    public function getFeed($limit, $coordinates) {
+        extract($coordinates);
         return DB::table('promotions')
             ->join('restaurant', 'promotions.restaurant_id', '=', 'restaurant.id')
             ->orderBy('promotions.updated_at', 'desc')
+            ->orderBy('distance', 'asc')
             ->select('promotions.id',
                 'promotions.name',
                 'restaurant.name as restaurant_name',
@@ -31,7 +33,16 @@ class DbPromotionRepository extends DbRepository implements PromotionRepository 
                 'restaurant.photo4',
                 'restaurant.photo5',
                 'restaurant.rate as restaurant_rate',
-                'promotions.restaurant_id')
+                'promotions.restaurant_id',
+                DB::raw('( 6371000
+                    * acos( cos( radians('.$latitude.') )
+                    * cos( radians( restaurant.latitude ) )
+                    * cos( radians( restaurant.longitude )
+                    - radians('.$longitude.') )
+                    + sin( radians('.$latitude.') )
+                    * sin(radians(restaurant.latitude)) ) ) as distance')
+
+            )
             ->paginate($limit);
     }
 
