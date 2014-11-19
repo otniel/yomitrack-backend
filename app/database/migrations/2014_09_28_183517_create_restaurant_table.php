@@ -31,15 +31,12 @@ class CreateRestaurantTable extends Migration {
                 ->index(); /*Change me to a MySQL SET field
                             *
                             * $table_prefix = DB::getTablePrefix();
-                            * DB::statement("ALTER TABLE `" . $table_prefix . "restaurant`
-                            *                   CHANGE `categories` `categories`
-                            *                   SET('fastfood', 'familystyle', 'finedining', 'cafe', 'mexican',
-                            *                      'barngrill', 'italian', 'pizza', 'diner', 'burguers', 'seafood');");
+                            * DB::statement("ALTER TABLE `restaurant` CHANGE `categories` `categories` SET('fastfood', 'familystyle', 'finedining', 'cafe', 'mexican', 'barngrill', 'italian', 'pizza', 'diner', 'burguers', 'seafood');");
                             */
             $table->double('latitude', 15, 10);
             $table->double('longitude', 15, 10);
             $table->integer('radius');
-            $table->string('email', 30)->nullable();
+            $table->string('email', 50)->nullable();
             $table->string('tel', 20)->nullable();
             $table->float('rate')->default(0);
             $table->string('photo1')->nullable();

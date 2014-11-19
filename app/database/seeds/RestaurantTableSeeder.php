@@ -2,7 +2,6 @@
 
 // Composer: "fzaninotto/faker": "v1.3.0"
 use Faker\Factory as Faker;
-
 class RestaurantTableSeeder extends Seeder {
 
 	public function run()
@@ -13,11 +12,15 @@ class RestaurantTableSeeder extends Seeder {
 
 		foreach(range(1, 32) as $index)
 		{
+            DB::statement("ALTER TABLE `restaurant` CHANGE `categories` `categories` SET('fastfood', 'familystyle', 'finedining', 'cafe', 'mexican', 'barngrill', 'italian', 'pizza', 'diner', 'burguers', 'seafood');");
+            $categories = array('fastfood', 'familystyle', 'finedining', 'cafe', 'mexican',
+                'barngrill', 'italian', 'pizza', 'diner', 'burguers', 'seafood');
 
 			Restaurant::create([
                 'user_id'     => $faker->randomElement($usersIds),
                 'name'        => $faker->word,
                 'description' => $faker->paragraph(4),
+                'categories' =>  $faker->randomElement($categories) . "," . $faker->randomElement($categories),
                 'address'     => $faker->address,
                 'latitude'    => $faker->latitude,
                 'longitude'   => $faker->longitude,
