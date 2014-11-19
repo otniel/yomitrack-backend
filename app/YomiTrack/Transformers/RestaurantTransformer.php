@@ -14,7 +14,7 @@ class RestaurantTransformer extends Transformer {
             'name'        => $restaurant['name'],
             'description' => $restaurant['description'],
             'address'     => $restaurant['address'],
-            'categories'  => $restaurant['categories'],
+            'categories'  => explode(",", $promotion->categories),
             'email'       => $restaurant['email'],
             'tel'         => $restaurant['tel'],
             'rate'        => (float) $restaurant['rate'],
