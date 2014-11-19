@@ -26,6 +26,16 @@ class CreateRestaurantTable extends Migration {
             $table->string('name', 25);
             $table->text('description');
             $table->string('address')->nullable();
+            $table->enum('categories', array('fastfood', 'familystyle', 'finedining', 'cafe', 'mexican',
+                'barngrill', 'italian', 'pizza', 'diner', 'burguers', 'seafood'))
+                ->index(); /*Change me to a MySQL SET field
+                            *
+                            * $table_prefix = DB::getTablePrefix();
+                            * DB::statement("ALTER TABLE `" . $table_prefix . "restaurant`
+                            *                   CHANGE `categories` `categories`
+                            *                   SET('fastfood', 'familystyle', 'finedining', 'cafe', 'mexican',
+                            *                      'barngrill', 'italian', 'pizza', 'diner', 'burguers', 'seafood');");
+                            */
             $table->double('latitude', 15, 10);
             $table->double('longitude', 15, 10);
             $table->integer('radius');
