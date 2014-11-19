@@ -27,6 +27,7 @@ class DbPromotionRepository extends DbRepository implements PromotionRepository 
             ->select('promotions.id',
                 'promotions.name',
                 'restaurant.name as restaurant_name',
+                'restaurant.categories',
                 'restaurant.photo1',
                 'restaurant.photo2',
                 'restaurant.photo3',
